@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparativa ThinkPad T14 vs P1 vs X1 (Generaciones)</title>
+  <!-- Cargar librería Chart.js desde CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+  <!-- Cargar librería DataTables (jQuery no requerido for simple use) -->
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 40px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #f4f4f4; }
+    .chart-container { width: 100%; max-width: 600px; margin: 30px auto; }
+  </style>
+</head>
+<body>
+
+<h1>Comparativa ThinkPad T14 (Gen3 vs Gen4), P1 (Gen5 vs Gen6), X1 Carbon (Gen11 vs Gen12)</h1>
+
+<p><em>Nota:</em> Todos los modelos configurados con 64&nbsp;GB RAM (o máximo posible) y Windows 11. Cifras de peso, batería, etc. son aproximadas.</p>
+
+<h2>Especificaciones Generales</h2>
+<table id="specs-table">
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Generación</th>
+      <th>CPU (máx. opción)</th>
+      <th>GPU (opción dedicada)</th>
+      <th>Pantalla (resolución máx.)</th>
+      <th>RAM</th>
+      <th>Almacenamiento</th>
+      <th>Batería (Wh)</th>
+      <th>Peso (kg)</th>
+      <th>Precio aprox.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ThinkPad T14</td><td>Gen 3 (2022)</td>
+      <td>Core i7-1260P (12C/16T)</td>
+      <td>Intel Iris Xe / NVIDIA MX550 2GB</td>
+      <td>14&quot; IPS 1920×1200</td>
+      <td>48 GB máx.</td>
+      <td>SSD 2 TB (1× M.2)</td>
+      <td>52.5</td>
+      <td>1.38</td>
+      <td>~ $1,500 - 1,800</td>
+    </tr>
+    <tr>
+      <td>ThinkPad T14</td><td>Gen 4 (2023)</td>
+      <td>Core i7-1365U (10C/12T)</td>
+      <td>Intel Iris Xe / NVIDIA MX550 4GB</td>
+      <td>14&quot; OLED 2880×1800</td>
+      <td>64 GB (no oficial, <br>máx. 48 GB)</td>
+      <td>SSD 2 TB (1× M.2)</td>
+      <td>52.5</td>
+      <td>1.40</td>
+      <td>~ $1,600 - 2,000</td>
+    </tr>
+    <tr>
+      <td>ThinkPad P1</td><td>Gen 5 (2022)</td>
+      <td>Core i9-12900H (14C/20T)</td>
+      <td>Nvidia RTX 3080 Ti / RTX A5500</td>
+      <td>16&quot; IPS 3840×2400</td>
+      <td>64 GB (2× SODIMM)</td>
+      <td>SSD 4 TB (2× M.2,<br> 8 TB RAID)</td>
+      <td>90</td>
+      <td>1.81</td>
+      <td>~ $2,300 - 4,000</td>
+    </tr>
+    <tr>
+      <td>ThinkPad P1</td><td>Gen 6 (2023)</td>
+      <td>Core i9-13900H (14C/20T)</td>
+      <td>Nvidia RTX 4080 / RTX A5500 (Ada)</td>
+      <td>16&quot; OLED 3840×2400</td>
+      <td>64 GB (hasta 96 GB)</td>
+      <td>SSD 4 TB (2× M.2,<br> 8 TB RAID)</td>
+      <td>90</td>
+      <td>1.78</td>
+      <td>~ $2,100 - 4,500</td>
+    </tr>
+    <tr>
+      <td>ThinkPad X1 Carbon</td><td>Gen 11 (2023)</td>
+      <td>Core i7-1355U (10C/12T)</td>
+      <td>Intel Iris Xe (integrada)</td>
+      <td>14&quot; IPS 1920×1200</td>
+      <td>64 GB (soldered)</td>
+      <td>SSD 2 TB (1× M.2)</td>
+      <td>57</td>
+      <td>1.12</td>
+      <td>~ $1,700 - 2,500</td>
+    </tr>
+    <tr>
+      <td>ThinkPad X1 Carbon</td><td>Gen 12 (2024)</td>
+      <td>Core Ultra 7 165U (12C/16T)</td>
+      <td>Intel Iris Xe / Arc (opcional)</td>
+      <td>14&quot; OLED 2880×1800 120Hz</td>
+      <td>64 GB (soldered)</td>
+      <td>SSD 2 TB (1× M.2)</td>
+      <td>57</td>
+      <td>1.09</td>
+      <td>~ $2,000 - 3,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Comparación de Peso</h2>
+<div class="chart-container">
+  <canvas id="chartPeso"></canvas>
+</div>
+<p style="text-align:center; font-size: 0.9em;">Peso (en kilogramos) de cada modelo en sus dos últimas generaciones.</p>
+
+<h2>Comparación de Capacidad de Batería</h2>
+<div class="chart-container">
+  <canvas id="chartBateria"></canvas>
+</div>
+<p style="text-align:center; font-size: 0.9em;">Capacidad de batería (Wh) en cada modelo (sin cambios entre generaciones en este caso).</p>
+
+<h2>Comparación de Precios Iniciales</h2>
+<div class="chart-container">
+  <canvas id="chartPrecio"></canvas>
+</div>
+<p style="text-align:center; font-size: 0.9em;">Precio base aproximado (USD) por generación (valores estimados).</p>
+
+<script>
+// Activar DataTable en la tabla de especificaciones
+document.addEventListener('DOMContentLoaded', function() {
+  new DataTable('#specs-table', {
+    paging: false,
+    info: false,
+    searching: false
+  });
+});
+
+// Datos para los gráficos
+const labelsModelos = ['T14 Gen3', 'T14 Gen4', 'P1 Gen5', 'P1 Gen6', 'X1 Gen11', 'X1 Gen12'];
+
+// Peso (kg) correspondiente a cada label
+const dataPeso = [1.38, 1.40, 1.81, 1.78, 1.12, 1.09];
+
+// Batería (Wh) correspondiente a cada label
+const dataBateria = [52.5, 52.5, 90, 90, 57, 57];
+
+// Precio base (en USD) estimado para cada label
+const dataPrecio = [1300, 1400, 2329, 2119, 1700, 1800];
+
+// Configuración gráfico de Peso
+new Chart(document.getElementById('chartPeso'), {
+  type: 'bar',
+  data: {
+    labels: labelsModelos,
+    datasets: [{
+      label: 'Peso (kg)',
+      data: dataPeso,
+      backgroundColor: 'rgba(54, 162, 235, 0.7)'
+    }]
+  },
+  options: {
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Kilogramos' } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Configuración gráfico de Batería
+new Chart(document.getElementById('chartBateria'), {
+  type: 'bar',
+  data: {
+    labels: labelsModelos,
+    datasets: [{
+      label: 'Batería (Wh)',
+      data: dataBateria,
+      backgroundColor: 'rgba(75, 192, 192, 0.7)'
+    }]
+  },
+  options: {
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Watt-hora (Wh)' } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+
+// Configuración gráfico de Precio
+new Chart(document.getElementById('chartPrecio'), {
+  type: 'bar',
+  data: {
+    labels: labelsModelos,
+    datasets: [{
+      label: 'Precio base (USD)',
+      data: dataPrecio,
+      backgroundColor: 'rgba(255, 205, 86, 0.7)'
+    }]
+  },
+  options: {
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Precio en USD' } }
+    },
+    plugins: { legend: { display: false } }
+  }
+});
+</script>
+
+</body>
+</html>
